@@ -67,3 +67,21 @@ end
 
 gem "webpacker", "~> 5.1"
 gem "react-rails"
+
+group :development, :test do
+  gem "factory_bot_rails"
+end
+
+group :development, :test do
+  gem "rspec-rails"
+end
+
+group :test do
+  gem "capybara"
+  gem "webdrivers"
+end
+
+group :test do
+  gem "test-prof"
+end
+gem "simple_form"
