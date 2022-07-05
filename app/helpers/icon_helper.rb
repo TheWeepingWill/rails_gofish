@@ -1,21 +1,34 @@
+# frozen_string_literal: true
+
 module IconHelper
-  def icon(name, classes: nil, color: nil, hover_text: name)
+  # rubocop:disable Metrics/ParameterLists
+  def icon(name, filled: false, size: 'medium', weight: 'normal', emphasis: 'normal', color: nil, classes: nil, hover_text: name, outline: nil)
     using_custom_icon = custom?(name)
     contents = using_custom_icon ? custom_content(name) : name
+    options = {
+      class: classes(using_custom_icon, filled, size, weight, emphasis, classes),
+      title: hover_text
+    }
+    options[:style] = "#{using_custom_icon ? 'fill' : 'color'}: var(--rms-colors-#{color}-base);" if color # primary, secondary, tertiary
 
-    tag.span(contents, class: classes(classes, using_custom_icon), style: "color: var(--color-#{color})", title: hover_text)
+    tag.span(contents, **options)
   end
 
   private
 
-  def classes(classes, using_custom_icon)
-    icon_class = using_custom_icon ? 'custom-icons' : 'material-icons'
+  def classes(using_custom_icon, filled, size, weight, emphasis, additional_classes = nil)
+    shape_class = filled ? 'icon--filled' : 'icon--outlined' # true, false
+    size_class = "icon--#{size}" # normal, large, x-large
+    weight_class = "icon--weight-#{weight}" # light, normal, semi-bold, bold
+    emphasis_class = "icon--#{emphasis}-emphasis" # low, normal, high
 
-    "#{icon_class} #{classes}"
+    base_class = using_custom_icon ? 'custom-icons' : 'material-symbols-outlined'
+    "#{base_class} #{shape_class} #{size_class} #{weight_class} #{emphasis_class} #{additional_classes}"
   end
+  # rubocop:enable Metrics/ParameterLists
 
   def custom_icon_path(name)
-    Webpacker.manifest.lookup("media/images/icons/#{name}.svg")
+    Webpacker.manifest.lookup("static/icons/#{name}.svg")
   end
 
   def custom?(name)
@@ -36,7 +49,7 @@ module IconHelper
     if Webpacker.dev_server.running?
       dev_server = Webpacker.dev_server
       custom_icon_path.slice!("#{dev_server.protocol}://#{dev_server.host_with_port}")
-      connection = URI.open("#{dev_server.protocol}://#{dev_server.host_with_port}#{custom_icon_path}")
+      connection = URI.open("#{dev_server.protocol}://#{dev_server.host_with_port}#{custom_icon_path}") # rubocop:disable Security/Open
       contents = connection.read
       connection.close
       contents
