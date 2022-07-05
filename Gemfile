@@ -49,9 +49,17 @@ gem "slim"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+gem "webpacker", "~> 5.1"
+gem "react-rails"
+gem "simple_form"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails"
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "rubocop-rails"
 end
 
 group :development do
@@ -66,28 +74,8 @@ group :development do
   # gem "spring"
 end
 
-gem "webpacker", "~> 5.1"
-gem "react-rails"
-
-group :development, :test do
-  gem "factory_bot_rails"
-end
-
-group :development, :test do
-  gem "rspec-rails"
-end
-
 group :test do
   gem "capybara"
   gem "webdrivers"
-end
-
-group :test do
   gem "test-prof"
-end
-gem "simple_form"
-
-group :development, :test do
-  gem "rubocop"
-  gem "rubocop-rails"
 end
