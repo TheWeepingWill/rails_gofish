@@ -85,3 +85,8 @@ group :test do
   gem "test-prof"
 end
 gem "simple_form"
+
+group :development, :test do
+  gem "rubocop"
+  gem "rubocop-rails"
+end
