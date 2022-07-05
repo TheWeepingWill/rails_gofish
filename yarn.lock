@@ -1287,6 +1287,11 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
+"@orchidjs/sifter@^0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@orchidjs/sifter/-/sifter-0.9.1.tgz#20580cb75bcc1de3c9b9c021e0e546eb59ff2813"
+  integrity sha512-bdW8vKTlWXfoAvUud0a4OeVPrtdvHH8gTshKqndzxAI6bXGPBejgry2wvIz0OZOqOuWuFAJWgNCjq/6S85U77A==
+
 "@rails/actioncable@^6.0.3-1":
   version "6.0.5"
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-6.0.5.tgz#a889f25b0c13ea0215d747e32fa3d1a52967f17b"
@@ -1347,6 +1352,14 @@
     webpack-assets-manifest "^3.1.1"
     webpack-cli "^3.3.12"
     webpack-sources "^1.4.3"
+
+"@rolemodel/rolemodel-design-system@^0.0.3-beta":
+  version "0.0.3-beta"
+  resolved "https://registry.yarnpkg.com/@rolemodel/rolemodel-design-system/-/rolemodel-design-system-0.0.3-beta.tgz#18e7292c4affa0790c15edb00ea96322803e27a4"
+  integrity sha512-x0Fver8t5QOL1C57YEYLXluRYcPpzDSX2ETvBFrnG1urIryTDqwqgU5qHm3PZNG/FRnCUyU3PJyXKvsCuL8lFA==
+  dependencies:
+    material-symbols "^0.1.0"
+    tom-select "^2.0.0"
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.3"
@@ -5930,6 +5943,11 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
+material-symbols@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/material-symbols/-/material-symbols-0.1.0.tgz#61d3e0c1aa47af534a1cf3bb48b37db16d4589a3"
+  integrity sha512-iL9+NDHYe6XTSH7YfTSMUM/r1/aPGXT0jqBRgx0OzjwQ9yvQ6iuid42mzcBINlGEIWDmmDFh4lYwg4rEKOlWnQ==
+
 md5.js@^1.3.4:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/md5.js/-/md5.js-1.3.5.tgz#b5d07b8e3216e3e27cd728d72f70d1e6a342005f"
@@ -8900,6 +8918,13 @@ toidentifier@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/toidentifier/-/toidentifier-1.0.1.tgz#3be34321a88a820ed1bd80dfaa33e479fbb8dd35"
   integrity sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==
+
+tom-select@^2.0.0:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/tom-select/-/tom-select-2.0.3.tgz#3fe57cf5da82be94b4083fb44c9edda5f198cc6e"
+  integrity sha512-IHcVHVb4/+I+4pAuXjEFVoH97mOvjp8CQ45PemnapcoRY46LqmH07hBwvRIIEznsXqBlFgZH7Uw7Cjh45mNlTA==
+  dependencies:
+    "@orchidjs/sifter" "^0.9.1"
 
 tough-cookie@^4.0.0:
   version "4.0.0"
