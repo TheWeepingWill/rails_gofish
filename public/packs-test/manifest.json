@@ -1,0 +1,39 @@
+{
+  "application.js": "/packs-test/js/application-5958b390791ec91abdbc.js",
+  "application.js.map": "/packs-test/js/application-5958b390791ec91abdbc.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs-test/js/application-5958b390791ec91abdbc.js"
+      ],
+      "js.map": [
+        "/packs-test/js/application-5958b390791ec91abdbc.js.map"
+      ]
+    },
+    "server_rendering": {
+      "js": [
+        "/packs-test/js/server_rendering-31527c76480a794884a7.js"
+      ],
+      "js.map": [
+        "/packs-test/js/server_rendering-31527c76480a794884a7.js.map"
+      ]
+    },
+    "stylesheets": {
+      "css": [
+        "/packs-test/css/stylesheets-7f402bcd.css"
+      ],
+      "js": [
+        "/packs-test/js/stylesheets-58794c006c3138bffaaa.js"
+      ],
+      "js.map": [
+        "/packs-test/js/stylesheets-58794c006c3138bffaaa.js.map"
+      ]
+    }
+  },
+  "media/material-symbols/material-symbols-outlined.woff2": "/packs-test/media/material-symbols/material-symbols-outlined-327800ba.woff2",
+  "server_rendering.js": "/packs-test/js/server_rendering-31527c76480a794884a7.js",
+  "server_rendering.js.map": "/packs-test/js/server_rendering-31527c76480a794884a7.js.map",
+  "stylesheets.css": "/packs-test/css/stylesheets-7f402bcd.css",
+  "stylesheets.js": "/packs-test/js/stylesheets-58794c006c3138bffaaa.js",
+  "stylesheets.js.map": "/packs-test/js/stylesheets-58794c006c3138bffaaa.js.map"
+}
