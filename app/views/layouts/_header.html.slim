@@ -1,0 +1,21 @@
+header.nav-bar
+  = link_to 'GoFish', root_path, id: "logo", class: 'nav-bar__brand'
+    
+  .flex
+    = link_to "Home", root_path, class: 'nav-bar__link'
+    = link_to "Help", '#', class: 'nav-bar__link'
+    / - if logged_in? 
+      = link_to "Users", '#', class: 'nav-bar__link'
+      = link_to "Log out", logout_path, class: 'nav-bar__link', method: :delete
+
+      / .form-group 
+        label.form-label Account
+        select.form-dropdown
+          option 
+          option 
+            = link_to "Profile", current_user 
+          option
+            = link_to "Settings", '#' 
+           
+    / - else
+      = link_to "Log in", login_path, class: 'nav-bar__link'
