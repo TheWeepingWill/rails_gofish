@@ -1,17 +1,22 @@
 -provide(:title, 'Create Account')
+
 h1 Create Account
-.card
-  = form_with(model: @user) do |f|
-      = f.label :name 
-      = f.text_field :name 
 
-      = f.label :email 
-      = f.email_field :email 
+= simple_form_for(@user) do |f| 
+  .card
+    .card__body 
+      = f.input :name
+      = f.input :email
+      = f.input :password
+      = f.input :password_confirmation
+    .card__footer
+      .flex.justify-end
+        = f.submit "Create my account", class: "btn-primary"
 
-      = f.label :password 
-      = f.password_field :password 
 
-      = f.label :password_confirmation, "Confirmation" 
-      = f.password_field :password_confirmation 
 
-      = f.submit "Create my account", class: "btn btn-primary"
+
+
+
+
+

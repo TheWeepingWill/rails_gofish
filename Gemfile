@@ -79,3 +79,7 @@ group :test do
   gem "webdrivers"
   gem "test-prof"
 end
+
+gem "bcrypt",  "3.1.18"
+gem 'faker'
+gem 'will_paginate'

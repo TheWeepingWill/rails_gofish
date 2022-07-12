@@ -20,24 +20,24 @@
     },
     "stylesheets": {
       "css": [
-        "/packs/css/stylesheets-5e828501.css"
+        "/packs/css/stylesheets-9fc18b8e.css"
       ],
       "js": [
-        "/packs/js/stylesheets-661ebce0239d3d68aa99.js"
+        "/packs/js/stylesheets-f8f8866f26e801b96227.js"
       ],
       "css.map": [
-        "/packs/css/stylesheets-5e828501.css.map"
+        "/packs/css/stylesheets-9fc18b8e.css.map"
       ],
       "js.map": [
-        "/packs/js/stylesheets-661ebce0239d3d68aa99.js.map"
+        "/packs/js/stylesheets-f8f8866f26e801b96227.js.map"
       ]
     }
   },
   "media/material-symbols/material-symbols-outlined.woff2": "/packs/media/material-symbols/material-symbols-outlined-327800ba.woff2",
   "server_rendering.js": "/packs/js/server_rendering-59dfdc907d7f620d63f0.js",
   "server_rendering.js.map": "/packs/js/server_rendering-59dfdc907d7f620d63f0.js.map",
-  "stylesheets.css": "/packs/css/stylesheets-5e828501.css",
-  "stylesheets.css.map": "/packs/css/stylesheets-5e828501.css.map",
-  "stylesheets.js": "/packs/js/stylesheets-661ebce0239d3d68aa99.js",
-  "stylesheets.js.map": "/packs/js/stylesheets-661ebce0239d3d68aa99.js.map"
+  "stylesheets.css": "/packs/css/stylesheets-9fc18b8e.css",
+  "stylesheets.css.map": "/packs/css/stylesheets-9fc18b8e.css.map",
+  "stylesheets.js": "/packs/js/stylesheets-f8f8866f26e801b96227.js",
+  "stylesheets.js.map": "/packs/js/stylesheets-f8f8866f26e801b96227.js.map"
 }
