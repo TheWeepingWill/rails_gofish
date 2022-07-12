@@ -1,0 +1,11 @@
+-provide(:title, 'Create')
+
+= simple_form_for(@game) do |f|
+  .card--padded
+    .card__header 
+      h1 Create Game  
+    .card__body 
+      = f.input :player_count
+    .card__footer 
+      .flex.flex_end 
+        = f.submit "Create", class: "btn-primary"

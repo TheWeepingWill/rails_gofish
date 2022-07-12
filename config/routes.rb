@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   get '/index', to: 'games#index'
-  
+  get '/play_game', to: 'games#play'
+  get '/create_game', to: 'games#create'
   resources :users
 end

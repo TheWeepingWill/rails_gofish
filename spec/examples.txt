@@ -11,6 +11,7 @@ example_id                                   | status  | run_time        |
 ./spec/models/user_spec.rb[1:8]              | passed  | 0.00385 seconds |
 ./spec/models/user_spec.rb[1:9]              | passed  | 0.00431 seconds |
 ./spec/requests/users_spec.rb[1:1:1]         | passed  | 0.0147 seconds  |
+./spec/system/create_game_spec.rb[1:1]       | failed  | 0.31503 seconds |
 ./spec/system/log_in_spec.rb[1:1]            | passed  | 0.21582 seconds |
 ./spec/system/log_in_spec.rb[1:2]            | passed  | 0.02074 seconds |
 ./spec/system/sign_in_spec.rb[1:1]           | passed  | 0.02261 seconds |
