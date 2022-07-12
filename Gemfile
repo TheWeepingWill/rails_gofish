@@ -83,3 +83,4 @@ end
 gem "bcrypt",  "3.1.18"
 gem 'faker'
 gem 'will_paginate'
+gem 'pry'

@@ -1,39 +1,43 @@
 {
-  "application.js": "/packs-test/js/application-5958b390791ec91abdbc.js",
-  "application.js.map": "/packs-test/js/application-5958b390791ec91abdbc.js.map",
+  "application.js": "/packs-test/js/application-4523ffa7fb070f120c36.js",
+  "application.js.map": "/packs-test/js/application-4523ffa7fb070f120c36.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs-test/js/application-5958b390791ec91abdbc.js"
+        "/packs-test/js/application-4523ffa7fb070f120c36.js"
       ],
       "js.map": [
-        "/packs-test/js/application-5958b390791ec91abdbc.js.map"
+        "/packs-test/js/application-4523ffa7fb070f120c36.js.map"
       ]
     },
     "server_rendering": {
       "js": [
-        "/packs-test/js/server_rendering-31527c76480a794884a7.js"
+        "/packs-test/js/server_rendering-5986f96e7d67e42ed198.js"
       ],
       "js.map": [
-        "/packs-test/js/server_rendering-31527c76480a794884a7.js.map"
+        "/packs-test/js/server_rendering-5986f96e7d67e42ed198.js.map"
       ]
     },
     "stylesheets": {
       "css": [
-        "/packs-test/css/stylesheets-7f402bcd.css"
+        "/packs-test/css/stylesheets-45eb5911.css"
       ],
       "js": [
-        "/packs-test/js/stylesheets-58794c006c3138bffaaa.js"
+        "/packs-test/js/stylesheets-4a59984c62fb77c2f35b.js"
+      ],
+      "css.map": [
+        "/packs-test/css/stylesheets-45eb5911.css.map"
       ],
       "js.map": [
-        "/packs-test/js/stylesheets-58794c006c3138bffaaa.js.map"
+        "/packs-test/js/stylesheets-4a59984c62fb77c2f35b.js.map"
       ]
     }
   },
   "media/material-symbols/material-symbols-outlined.woff2": "/packs-test/media/material-symbols/material-symbols-outlined-327800ba.woff2",
-  "server_rendering.js": "/packs-test/js/server_rendering-31527c76480a794884a7.js",
-  "server_rendering.js.map": "/packs-test/js/server_rendering-31527c76480a794884a7.js.map",
-  "stylesheets.css": "/packs-test/css/stylesheets-7f402bcd.css",
-  "stylesheets.js": "/packs-test/js/stylesheets-58794c006c3138bffaaa.js",
-  "stylesheets.js.map": "/packs-test/js/stylesheets-58794c006c3138bffaaa.js.map"
+  "server_rendering.js": "/packs-test/js/server_rendering-5986f96e7d67e42ed198.js",
+  "server_rendering.js.map": "/packs-test/js/server_rendering-5986f96e7d67e42ed198.js.map",
+  "stylesheets.css": "/packs-test/css/stylesheets-45eb5911.css",
+  "stylesheets.css.map": "/packs-test/css/stylesheets-45eb5911.css.map",
+  "stylesheets.js": "/packs-test/js/stylesheets-4a59984c62fb77c2f35b.js",
+  "stylesheets.js.map": "/packs-test/js/stylesheets-4a59984c62fb77c2f35b.js.map"
 }
