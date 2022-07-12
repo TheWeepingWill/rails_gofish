@@ -11,8 +11,8 @@ example_id                                   | status  | run_time        |
 ./spec/models/user_spec.rb[1:8]              | passed  | 0.00338 seconds |
 ./spec/models/user_spec.rb[1:9]              | passed  | 0.00306 seconds |
 ./spec/requests/users_spec.rb[1:1:1]         | passed  | 0.21759 seconds |
-./spec/system/log_in_spec.rb[1:1]            | passed  | 0.04028 seconds |
-./spec/system/log_in_spec.rb[1:2]            | passed  | 0.01338 seconds |
+./spec/system/log_in_spec.rb[1:1]            | passed  | 0.02115 seconds |
+./spec/system/log_in_spec.rb[1:2]            | passed  | 0.219 seconds   |
 ./spec/system/sign_in_spec.rb[1:1]           | passed  | 0.02818 seconds |
 ./spec/system/sign_in_spec.rb[1:2]           | passed  | 0.03043 seconds |
 ./spec/views/users/new.html.erb_spec.rb[1:1] | pending | 0 seconds       |
