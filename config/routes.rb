@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   get '/hello', to: 'application#hello'
   get '/goodbye', to: 'application#goodbye'
   get '/styleguide', to: 'styleguide#index'
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
   resources :users
 
 end
