@@ -14,7 +14,9 @@ RSpec.describe 'Sign In', type: :system do
     expect { click_on 'Create my account' }.to change { User.count }.from(0).to(1)
 
     #then
-    expect(page).to have_content name
+    expect(page).to have_content 'Log Out'
+    expect(page).to have_content 'Create Game'
+    expect(page).to have_content 'Join Game'
   end
 
   it 'shows validation messages when the email is taken' do 
