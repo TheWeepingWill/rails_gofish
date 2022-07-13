@@ -6,15 +6,20 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     if @game.save 
-      redirect_to  game_play_url 
+      redirect_to play_game_url(@game)
     else 
-      render 'new', stats: unprocessable_entity
+      render 'new', status: :unprocessable_entity
     end
+  end
+
+  def show
+    binding.pry
+    @game = Game.find(params[:id])
   end
 
   private
 
   def game_params
-    params.require(:game).permit(:names, :player_count)
+    params.require(:game).permit(:name, :player_count)
   end
 end

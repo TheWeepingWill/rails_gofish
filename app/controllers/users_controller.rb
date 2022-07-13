@@ -23,7 +23,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    # debugger
     params.require(:user).permit(:name, :email, :password,
                                   :password_confirmation)
   end

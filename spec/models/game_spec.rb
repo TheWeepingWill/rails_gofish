@@ -13,5 +13,8 @@ RSpec.describe Game, type: :model do
     expect(invalid_game).not_to be_valid
     expect(valid_game).to be_valid
   end
-  
+
+  it 'has remaining players' do 
+    expect(valid_game.remaining_players).to be 1
+  end  
 end
