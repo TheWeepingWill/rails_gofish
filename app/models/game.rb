@@ -6,7 +6,6 @@ class Game < ApplicationRecord
   validates :player_count, presence: true, comparison: { less_than_or_equal_to: VALID_PLAYER_MAX }
 
   def remaining_players 
-    binding.pry
     player_count - users.length
   end
 
