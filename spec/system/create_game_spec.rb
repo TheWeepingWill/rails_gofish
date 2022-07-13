@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe 'Log In', type: :system do 
+RSpec.describe 'Create Game', type: :system do 
   let!(:user) { User.create!(name:  "Will", email: "will@gmail.com", password: "password") }
 
-  fit 'creates a game', :chrome do 
+  it 'creates a game', :chrome do 
     player_count = 2
     login
 
@@ -13,7 +13,7 @@ RSpec.describe 'Log In', type: :system do
     click_on 'Create' 
   
     game = Game.last
-    expect(page).to have_content "waiting for #{player_count - game.users.count} players..." 
+    expect(page).to have_content "Waiting for #{player_count - game.users.count} player..." 
   end
   
   
