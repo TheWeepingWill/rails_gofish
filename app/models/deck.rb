@@ -28,5 +28,16 @@ class Deck
     def deck_count 
         cards.count
     end
+
+    def as_json(*)
+      {
+         cards: cards.map(&:as_json)
+      }
+    end
+
+    def self.from_json(json)
+      json_cards = json['cards'].map { |json_card| Card.from_json(json_card) }
+      self.new(json_cards)
+    end
     
 end

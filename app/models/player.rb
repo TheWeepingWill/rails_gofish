@@ -37,9 +37,9 @@ class Player
       if hand_ranks.count { |card_rank| rank == card_rank} > 3
         hand.delete_if {|card| card.rank == rank}
         books.push("#{rank}s")
-        @books.flatten
       end
     end
+    @books.flatten
   end
 
   def give_cards_by_rank(rank)
@@ -50,6 +50,19 @@ class Player
 
   def book_count 
     books.count
+  end
+
+  def as_json(*)
+    {
+      name: name,
+      hand: hand.map(&:as_json),
+      books: books
+    }
+  end
+
+  def self.from_json(json) 
+    json_hand = json['hand'].map { |card| Card.from_json(card) } 
+    self.new(name: json['name'], hand: json_hand, books: json['books'])
   end
 
 end

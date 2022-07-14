@@ -34,7 +34,7 @@ RSpec.describe 'Game', type: :system do
         game
         login(user2)
         click_on 'Join Game' 
-        click_on 'Play Round'
+        expect(page).to have_content "Game has started" 
         expect(page).to have_content "It's Will's Turn"
       end
     end

@@ -21,8 +21,6 @@ class GoFish
   end
 
   def play_round(rank, target_player)
-    # binding.pry
-    puts "A round is being played: #{target_player.name} asked for #{rank}"
     return if target_player === current_player
     result = RoundResult.new(target_player_name: target_player.name, rank: rank, requesting_player_name: current_player.name)
     taken_cards = target_player.give_cards_by_rank(rank)
@@ -30,7 +28,6 @@ class GoFish
       result.went_fishing = true
       player_fishes(rank, result)
     else
-      puts "#{current_player} got #{target_player.name}'s #{rank}'s"
       current_player.take_cards(taken_cards)
       result.got_match = true
       result.match_from_request
@@ -42,15 +39,12 @@ class GoFish
   def player_fishes(rank, result)
     card = go_fish(result)
     if !card.nil? && card.rank != rank 
-      puts "#{current_player.name} did not get a match from fishing"
       round_increment
       result.current_player = current_player.name
       result.no_match
     elsif card.nil?
-      puts "Card was nil"
       round_increment
     else
-      puts "#{current_player.name} got a match from fishing"
       result.current_player = current_player.name
       result.got_match = true
       result.match_from_fishing

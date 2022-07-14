@@ -19,4 +19,15 @@ class Card
     def to_s
       "#{rank} of #{suit}"
     end
+
+    def as_json(*)
+      {
+        suit: suit,
+        rank: rank
+      }
+    end
+
+    def self.from_json(json)
+      self.new(json['rank'], json['suit'])
+    end
   end
