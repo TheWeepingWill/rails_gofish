@@ -17,4 +17,8 @@ class Game < ApplicationRecord
     update(started_at: DateTime.current)
   end
 
+  def current_player
+    users[0]
+  end
+
 end

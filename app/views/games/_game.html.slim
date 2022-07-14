@@ -4,4 +4,4 @@
   .flex 
     = "#{game.users.count}/#{game.player_count}"
   .flex
-    = link_to 'Join Game', create_game_user_path(game.id), class: 'btn-primary'
+    = link_to 'Join Game', create_game_user_path(game), class: 'btn-primary'

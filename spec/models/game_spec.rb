@@ -35,7 +35,15 @@ RSpec.describe Game, type: :model do
       game = create(:game)
       game.start!
       expect(game).not_to be_started_at
+    end
+  end
+  
+  context '#current_player' do 
+    it 'has a current player' do 
+      game = create(:game, users: [create(:user, name: 'Josh'), create(:user)])
 
+      game.start!
+      expect(game.current_player.name).to eq game.users[0].name
     end
   end
 end

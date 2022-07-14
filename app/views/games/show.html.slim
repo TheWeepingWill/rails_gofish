@@ -1,7 +1,8 @@
 -provide(:title, 'Play Game')
--if !@game.started_at
+- if !@game.started_at
   = "Waiting for #{@game.remaining_players} #{@game.remaining_players == 1 ? 'player' : 'players'}..."
--else
-  = 'Game has started'
+- else 
+  = 'Game has started'  
+  = render 'games/play_game'
 
   

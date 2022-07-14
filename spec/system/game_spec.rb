@@ -3,9 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Game', type: :system do 
   let!(:user1) { User.create!(name:  "Will", email: "will@gmail.com", password: "password") }
   let!(:user2) { User.create!(name:  "Josh", email: "josh@gmail.com", password: "password") }
-  let(:game) { Game.create(name: 'Game', player_count: 2, 
-                        users: [User.new(name: 'Will', email: 'will@example.com', 
-                        password: 'password')]) }
+  let(:game) { create(:game, users: [create(:user)]) }
 
   describe 'Create Game' do   
     it 'creates a game' do 
@@ -27,12 +25,18 @@ RSpec.describe 'Game', type: :system do
       game
       login(user2)
       click_on 'Join Game' 
-
       expect(page).to have_content "Game has started" 
       end
     end
 
-    describe 'Started Game' do 
+    describe 'game plays rounds' do 
+      it 'can play a round' do 
+        game
+        login(user2)
+        click_on 'Join Game' 
+        click_on 'Play Round'
+        expect(page).to have_content "It's Will's Turn"
+      end
     end
     
     
