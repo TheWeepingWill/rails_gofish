@@ -17,6 +17,10 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
+  def index
+    @games = Game.paginate(page: params[:page])
+  end
+
   private
 
   def game_params

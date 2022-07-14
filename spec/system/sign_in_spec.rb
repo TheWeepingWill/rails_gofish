@@ -16,7 +16,6 @@ RSpec.describe 'Sign In', type: :system do
     #then
     expect(page).to have_content 'Log Out'
     expect(page).to have_content 'Create Game'
-    expect(page).to have_content 'Join Game'
   end
 
   it 'shows validation messages when the email is taken' do 

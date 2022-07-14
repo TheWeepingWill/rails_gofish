@@ -1,2 +1,7 @@
 -provide(:title, 'Play Game')
-= "Waiting for #{@game.remaining_players} #{@game.remaining_players == 1 ? 'player' : 'players'}..."
+-if !@game.started_at
+  = "Waiting for #{@game.remaining_players} #{@game.remaining_players == 1 ? 'player' : 'players'}..."
+-else
+  = 'Game has started'
+
+  

@@ -12,7 +12,6 @@ RSpec.describe 'Log In', type: :system do
     # then
     expect(page).to have_content 'Log Out'
     expect(page).to have_content 'Create Game'
-    expect(page).to have_content 'Join Game'
   end
 
   let!(:user) { create(:user) }

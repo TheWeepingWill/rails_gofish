@@ -1,0 +1,7 @@
+.card--padded.flex.justify-between
+  .flex
+    = game.name
+  .flex 
+    = "#{game.users.count}/#{game.player_count}"
+  .flex
+    = link_to 'Join Game', create_game_user_path(game.id), class: 'btn-primary'

@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get '/play_game/:id', to: 'games#show', as: 'play_game'
   get '/create_game', to: 'games#new'
   post '/games', to: 'games#create'
+
+  get '/create_game_user/:id', to: 'game_users#create', as: 'create_game_user'
+  # post '/create_game_user', to: 'game_users#create'
   resources :users
-  resources :game
 end

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Game, type: :model do 
 
-  let!(:valid_game) { Game.new(name: 'Game', player_count: 2, users: [User.new(name: 'Will', email: 'will@example.com', password: 'password')] ) }
+  let!(:valid_game) { create(:game, users: [create(:user)])}
   let!(:invalid_game) { Game.new }
   
   it 'initializes' do 
@@ -16,5 +16,26 @@ RSpec.describe Game, type: :model do
 
   it 'has remaining players' do 
     expect(valid_game.remaining_players).to be 1
-  end  
+  end 
+  
+  it 'can be started' do 
+    started_game = create(:game, :started)
+    expect(started_game).to be_started_at 
+    expect(started_game.started_at).to be_within(1.minute).of(Time.now)
+  end
+
+  context '#start!' do 
+    it 'starts the game' do 
+      game = create(:game, users: [create(:user), create(:user)])
+      game.start!
+      expect(game).to be_started_at
+    end
+
+    it 'will not start with the incorrect amount of players' do 
+      game = create(:game)
+      game.start!
+      expect(game).not_to be_started_at
+
+    end
+  end
 end

@@ -1,6 +1,6 @@
 -provide(:title, 'index')
 
 = link_to 'Create Game', create_game_path, class: 'btn--outline'
-= link_to 'Join Game', "#", class: 'btn--outline'
+= render @games
 
 
