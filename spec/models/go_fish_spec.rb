@@ -26,13 +26,13 @@ RSpec.describe 'GoFish' do
   end
 
   describe '#play_round' do 
-    it 'does not get a match from player or fishing' do 
+    fit 'does not get a match from player or fishing' do 
       setup_rigged_game(players: players, deck: [Card.new('2', 'Spades')], hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Hearts')]])
       game.play_round('Ace' , players[1])
-      expect(game.round).to be 1
+      expect(game.current_user_index).to be 1
       expect(players[0].hand).to eq [Card.new('Ace', 'Hearts'), Card.new('2', 'Spades')]
       expect(players[1].hand).to eq [Card.new('3', 'Hearts')]
-      expect(game.history[0].requesting_player_message).to eq ["Josh did not have any Aces","You went fishing and got the 2 of Spades!","Turn is over","It's Josh's turn"]  
+      expect(game.history[0].current_player_message).to eq ["Josh did not have any Aces","You went fishing and got the 2 of Spades!","Turn is over","It's Josh's turn"]  
       expect(game.history[0].target_player_message).to eq ["William asked you for Aces","William went fish!","William's turn is over","It's Your turn"  ]  
     end
 
@@ -41,7 +41,7 @@ RSpec.describe 'GoFish' do
       game.play_round('Ace' , players[1])
       expect(players[0].hand).to eq [Card.new('Ace', 'Spades'), Card.new('Ace', 'Hearts')]
       expect(players[1].hand).to eq [Card.new('2', 'Spades')]
-      expect(game.history[0].requesting_player_message).to eq ["Josh did not have any Aces","You went fishing and got the Ace of Spades!", "Go Again!"]  
+      expect(game.history[0].current_player_message).to eq ["Josh did not have any Aces","You went fishing and got the Ace of Spades!", "Go Again!"]  
       expect(game.history[0].target_player_message).to eq ["William asked you for Aces","William went fish!","William got a Ace","It's William's turn"]  
       
     end
@@ -79,6 +79,68 @@ RSpec.describe 'GoFish' do
   it 'completes a game' do 
     setup_rigged_game(players: players) 
     expect { play_game }.not_to raise_error
+  end
+
+  context "history" do 
+    it 'history is not empty after a round' do 
+      game1 = setup_rigged_game(players: players, 
+                                hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Spades')]],
+                                deck: [Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')])
+      game1.play_round('Ace', players[1])
+      expect(game.history.empty?).to be false
+    end
+    
+  end
+
+  context 'json' do 
+    it 'can turn into json' do 
+      game1 = setup_rigged_game(players: players, hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Spades')]], deck: [ Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')])
+      result = game1.as_json.with_indifferent_access
+      expect(result).to eq({
+        'players' =>  
+           [{ 'name' => 'William',
+              'hand' => [{'rank'=> 'Ace', 'suit' => 'Hearts' }],
+              'books' => [] }, 
+            { 'name' => 'Josh',
+              'hand' => [{'rank'=> '3', 'suit' => 'Spades' }],
+              'books' => [] }
+            ],
+        'deck' => {
+            'cards' => [{'rank'=> 'Ace', 'suit' => 'Diamonds'  }, {'rank'=> 'Ace', 'suit' => 'Spades'}]
+          }, 
+        'started' => false,
+        'current_user_index' => 0,
+        'books' => [],
+        'history' => []
+      })
+
+    end 
+
+    it 'can inflate json into an object' do 
+      json_game = {
+        'players' =>  
+           [{ 'name' => 'William',
+              'hand' => [{'rank'=> 'Ace', 'suit' => 'Hearts' }],
+              'books' => [] }, 
+            { 'name' => 'Josh',
+              'hand' => [{'rank'=> '3', 'suit' => 'Spades' }],
+              'books' => [] }
+            ],
+        'deck' => {
+            'cards' => [{'rank'=> 'Ace', 'suit' => 'Diamonds'  }, {'rank'=> 'Ace', 'suit' => 'Spades'}]
+          }, 
+        'started' => false,
+        'round' => 0,
+        'books' => [],
+        'history' => [],
+        'current_player' => ''
+      }
+      game = Game.from_json(json_game)
+      expect(game.players.map(&:name)).to match_array players.map(&:name)
+      expect(game.deck).to eq [Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')]
+      expect(game.started).to be false
+    end 
+  
   end
 
 # Helper Methods and Classes

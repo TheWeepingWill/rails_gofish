@@ -1,17 +1,17 @@
-require_relative 'deck'
-require_relative 'round_result'
-require 'pry'
 class GoFish
   LESS_THAN_4_STARTING_HAND = 7
   MORE_THAN_4_STARTING_HAND = 5
-  attr_accessor :players, :deck, :started, :books, :round, :round_result, :history
+  attr_accessor :players, :deck, :started, :books, :current_user_index, 
+  :round_result, :history, :next_user_index
   def initialize(players: [], deck: Deck.new, books: [])
     @players = players
     @deck = deck
     @started = false
     @books = books
-    @round = 0
+    @current_user_index = 0
     @history = []
+    @next_user_index = 0
+    @book_created = false
   end
 
   def start
@@ -21,41 +21,50 @@ class GoFish
   end
 
   def play_round(rank, target_player)
+    turn_player = current_player
     return if target_player === current_player
-    result = RoundResult.new(target_player_name: target_player.name, rank: rank, requesting_player_name: current_player.name)
     taken_cards = target_player.give_cards_by_rank(rank)
-    if taken_cards == []
-      result.went_fishing = true
-      player_fishes(rank, result)
+    if taken_cards.empty?
+      fished_card = player_fishes(rank)
+
+      resulting_cards = [fished_card]
+      book_created = book_check(fished_card.rank)
+      got_from = 'fishing'
     else
       current_player.take_cards(taken_cards)
-      result.got_match = true
-      result.match_from_request
+
+      resulting_cards = taken_cards
+      book_created = book_check(rank)
+      got_from = 'player'
     end
+
+    result = RoundResult.new(
+      target_player_name: target_player.name, 
+      current_player_name: turn_player.name, 
+      next_player_name: current_player.name, 
+      rank: rank, 
+      resulting_cards: resulting_cards, 
+      book_completed: book_created,
+      got_from: got_from
+    )
+
     set_history(result)
-    post_round_check(result)
+    post_round_check
   end
   
-  def player_fishes(rank, result)
-    card = go_fish(result)
+  def player_fishes(rank)
+    card = go_fish
     if !card.nil? && card.rank != rank 
-      round_increment
-      result.current_player = current_player.name
-      result.no_match
+      current_user_index_increment
     elsif card.nil?
-      round_increment
-    else
-      result.current_player = current_player.name
-      result.got_match = true
-      result.match_from_fishing
+      current_user_index_increment
     end 
+    card
   end
 
-  def go_fish(result)
+  def go_fish
     return nil if deck.cards.empty?
-    card = current_player.take_cards(deck.deal)[0]
-    result.resulting_cards = card
-    card
+    current_player.take_cards(deck.deal)[0]
   end
 
   def deal
@@ -77,7 +86,7 @@ class GoFish
   end
 
   def current_player
-    players[round]
+    players[current_user_index]
   end
 
   def ready_to_start?
@@ -92,8 +101,12 @@ class GoFish
     players.reject { |player| player.name == current_player.name }.map { |player| player.name }
   end
 
-  def round_increment
-    @round = (round + 1) % players.count
+  def current_user_index_increment
+    @current_user_index = (current_user_index + 1) % players.count
+  end
+
+  def next_user_index_increment
+    @next_user_index = (current_user_index + 1) % players.count
   end
 
   def set_history(result)
@@ -109,19 +122,42 @@ class GoFish
     players.map { |player| player.books }.flatten.count == 13 
   end
 
-  def post_round_check(result)
+  def post_round_check
     return if over?
     if current_player.hand.empty? && deck.cards.empty? 
-      round_increment 
-      result.requesting_player_name = current_player.name
-      result.no_cards_in_deck
+      current_user_index_increment 
     elsif current_player.hand.empty?
       puts 'post_round_check'
-      go_fish(result)
+      go_fish
     end
   end
 
   def game_winner
     winner = players.sort { |player| player.book_count}.last
+  end
+
+  def next_player
+    next_user_index_increment
+    players[next_user_index]
+  end
+
+  def book_check(rank) 
+    current_player.books.include?(rank)
+  end
+
+  def as_json(*) 
+    {
+      players: players.map(&:as_json),
+      deck: deck.as_json,
+      started: started,
+      books: books,
+      current_user_index: current_user_index,
+      history: history
+    }
+  end
+
+  def self.from_json(json)
+    players = json['players'].map(&:as_json)
+    deck = Deck.new(json['deck']['cards'].map(&:as_json)) 
   end
 end

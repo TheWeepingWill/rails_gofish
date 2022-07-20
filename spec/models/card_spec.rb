@@ -1,4 +1,5 @@
-RSpec.describe 'Card' do 
+require 'rails_helper'
+RSpec.describe Card do 
     
   it 'Creates a card' do 
     card = Card.new( '3', 'Hearts')
@@ -31,7 +32,6 @@ RSpec.describe 'Card' do
 
   it 'can inflate json back into an object' do 
     card_json = { 'rank' => '3', 'suit' => 'Hearts' }
-    binding.pry
     card = Card.from_json(card_json)
     expect(card).to eq Card.new('3', 'Hearts')
   end

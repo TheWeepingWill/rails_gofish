@@ -1,4 +1,5 @@
-RSpec.describe 'Deck' do 
+require 'rails_helper'
+RSpec.describe Deck do 
   it 'initializes a standard deck' do 
     deck = Deck.new
 
