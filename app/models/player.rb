@@ -1,10 +1,11 @@
 class Player
-  attr_reader :name
+  attr_reader :name, :user_id
   attr_accessor :hand, :books
-  def initialize(name: '', hand: [], books: [])
+  def initialize(name: '', hand: [], books: [], user_id: nil)
     @name = name
     @hand = hand
     @books = books
+    @user_id = user_id
   end
 
   def take_cards(*cards)
@@ -56,7 +57,8 @@ class Player
     {
       name: name,
       hand: hand.map(&:as_json),
-      books: books
+      books: books,
+      user_id: user_id
     }
   end
 
