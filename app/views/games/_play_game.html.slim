@@ -1,4 +1,4 @@
-- if current_user == @game.current_player
+- if current_user.name == @game.current_player.name
   = link_to 'Play Round', '#', class: 'btn-primary'
 - else 
   = "It is #{@game.current_player.name}'s turn"

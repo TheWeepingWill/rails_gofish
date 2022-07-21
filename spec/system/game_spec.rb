@@ -30,12 +30,13 @@ RSpec.describe 'Game', type: :system do
     end
 
     describe 'game plays rounds' do 
-      it 'can play a round' do 
+      fit 'can play a round', :chrome do 
         game
         login(user2)
         click_on 'Join Game' 
+        # binding.pry
         expect(page).to have_content "Game has started" 
-        expect(page).to have_content "It's Will's Turn"
+        expect(page).to have_content "It is Will's turn"
       end
     end
     

@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
-      redirect_to index_url
+      redirect_to games_url
     else
       render 'new', status: :unprocessable_entity
     end
