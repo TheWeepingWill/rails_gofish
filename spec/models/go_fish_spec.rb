@@ -100,11 +100,14 @@ RSpec.describe 'GoFish' do
         'players' =>  
            [{ 'name' => 'William',
               'hand' => [{'rank'=> 'Ace', 'suit' => 'Hearts' }],
-              'books' => [] }, 
+              'books' => [],
+              'user_id' => nil 
+            }, 
             { 'name' => 'Josh',
               'hand' => [{'rank'=> '3', 'suit' => 'Spades' }],
-              'books' => [] }
-            ],
+              'books' => [],
+              'user_id' => nil 
+            }],
         'deck' => {
             'cards' => [{'rank'=> 'Ace', 'suit' => 'Diamonds'  }, {'rank'=> 'Ace', 'suit' => 'Spades'}]
           }, 
@@ -225,7 +228,7 @@ RSpec.describe 'GoFish' do
       expect(game_hash).to be_a_kind_of Hash
     end
 
-    fit 'can create an object without history' do 
+    it 'can create an object without history' do 
       game_hash = {
         'players' =>  
            [{ 'name' => 'William',

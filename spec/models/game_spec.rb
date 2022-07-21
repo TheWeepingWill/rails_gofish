@@ -58,30 +58,29 @@ RSpec.describe Game, type: :model do
       game = create(:game, users: [ user1, user2 ])
       game.go_fish = go_fish
 
-      binding.pry
 
       expect(game.go_fish).not_to be_nil
     end 
 
-    fit 'inflates json back into an gofish object' do 
+    it 'inflates json back into an gofish object' do 
       user1 = create(:user)
       user2 = create(:user)
       
       go_fish_json = {
         'players' => [{
-          'cards' => {'rank' => 'Ace', 'suit' => 'Spades'}
-        }, {
-          'cards' => {'rank' => '2', 'suit' => 'Diamonds'}
+          'hand' => [{'rank' => 'Ace', 'suit' => 'Spades'}]
+        }, 
+        {
+          'hand' => [{'rank' => '2', 'suit' => 'Diamonds'}]
         }],
         'deck' => {
-          'cards' => [{'rank' => '4', 'suit' => 'Diamonds' }, 
+          'cards' => [{'rank' => '4', 'suit' => 'Diamonds'}, 
                       {'rank' => '7', 'suit' => 'Clubs'}]
         }
       }
 
-      game = create(:game, go_fish: go_fish_json)
-
-      expect(game.go_fish.players[0].hand[0]).to eq Card.new('Aces', 'Spades')
+      game = create(:game, go_fish: GoFish.load(go_fish_json))
+      expect(game.go_fish.players[0].hand[0]).to eq Card.new('Ace', 'Spades')
       expect(game.go_fish.deck.cards[0]).to eq Card.new('4', 'Diamonds')
     end
 

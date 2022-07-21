@@ -61,7 +61,7 @@ RSpec.describe 'RoundResult' do
         got_from: 'fishing', 
         resulting_cards: [matched_card], 
         book_completed: false,
-        next_player_name: PLAYER_NAMES[1] 
+        next_player_name: PLAYER_NAMES.first 
       )
       expect(result.current_player_message).to eq ["#{PLAYER_NAMES.last} did not have any Aces", "You went fishing and got the Ace of Hearts!", "Go Again!"]
       expect(result.target_player_message).to eq ["Joe asked you for Aces", "Joe went fish!", "Joe got a Ace", "It's Joe's turn" ]
@@ -76,7 +76,7 @@ RSpec.describe 'RoundResult' do
         got_from: 'player', 
         resulting_cards: [Card.new('Ace', 'Hearts'), Card.new('Ace', 'Spades')], 
         book_completed: false,
-        next_player_name: PLAYER_NAMES[1] 
+        next_player_name: PLAYER_NAMES.first
       )
       expect(result.current_player_message).to eq ["#{PLAYER_NAMES.last} had Aces", "Go Again!"]
       expect(result.target_player_message).to eq [ "Joe took your Aces", "It's Joe's turn" ]
@@ -95,7 +95,7 @@ RSpec.describe 'RoundResult' do
         next_player_name: PLAYER_NAMES[1] 
       )
       expect(result.output(Player.new(name: PLAYER_NAMES[0]))).to eq ["#{PLAYER_NAMES.last} had Aces", "You completed a book of Aces!", "Go Again!"]
-      expect(result.output(Player.new(name: PLAYER_NAMES[2]))).to eq ["Joe took your Aces", "Oh no! Joe completed a book of Aces!", "It's Joe's turn" ]
+      expect(result.output(Player.new(name: PLAYER_NAMES[2]))).to eq ["Joe took your Aces", "Oh no! Joe completed a book of Aces!", "It's #{PLAYER_NAMES[1]}'s turn" ]
     end
 
     it 'tells what book was completed when it got from fishing' do 
@@ -105,7 +105,7 @@ RSpec.describe 'RoundResult' do
         got_from: 'fishing', 
         resulting_cards: [Card.new('Ace', 'Hearts')], 
         book_completed: true,
-        next_player_name: PLAYER_NAMES[1] 
+        next_player_name: PLAYER_NAMES.first 
       )
       expect(result.output(Player.new(name: PLAYER_NAMES[0]))).to eq ["#{PLAYER_NAMES.last} did not have any Aces", 
                                                         "You went fishing and got the Ace of Hearts!", "You completed a book of Aces!", 

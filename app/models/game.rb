@@ -17,14 +17,14 @@ class Game < ApplicationRecord
   def start!
     return false unless player_count == users.length
     
-    players = Users.map { |user| Player.new(user_id: user.id) }
+    players = users.map { |user| Player.new(user_id: user.id) }
     go_fish = GoFish.new(players: players)
     go_fish.start
     update(go_fish: go_fish, started_at: DateTime.current)
   end
 
   def current_player
-    users[0]
+    self.go_fish.current_player
   end
 
 end
