@@ -39,7 +39,7 @@ RSpec.describe Game, type: :model do
   end
   
   context '#current_player' do 
-    fit 'has a current player' do 
+    it 'has a current player' do 
       game = create(:game, users: [create(:user, name: 'Josh'), create(:user)])
 
       game.start!

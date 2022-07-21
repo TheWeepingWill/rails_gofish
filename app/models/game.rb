@@ -17,7 +17,7 @@ class Game < ApplicationRecord
   def start!
     return false unless player_count == users.length
     
-    players = users.map { |user| Player.new(user_id: user.id) }
+    players = users.map { |user| Player.new(user_id: user.id, name: user.name) }
     go_fish = GoFish.new(players: players)
     go_fish.start
     update(go_fish: go_fish, started_at: DateTime.current)
