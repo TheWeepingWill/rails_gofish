@@ -53,6 +53,14 @@ RSpec.describe Player do
       expect(player.name).to eq 'Sydney'
       expect(player.books).to eq ['Aces', '4s']
     end
+
+    fit 'can inflate an json player without a hand' do 
+      player_hash = {
+        'user_id' => 1
+      }
+      player = Player.from_json(player_hash)
+      expect(player.hand).to eq []
+    end
   end
 
 end

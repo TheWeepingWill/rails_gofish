@@ -44,7 +44,7 @@ class Player
   end
 
   def give_cards_by_rank(rank)
-    cards = hand.select {|card| card.rank == rank }
+    cards = hand.select {|card| card.rank == rank } 
     hand.delete_if {|card| card.rank == rank}
     cards
   end
@@ -63,7 +63,7 @@ class Player
   end
 
   def self.from_json(json) 
-    json_hand = json['hand'].map { |card| Card.from_json(card) } 
+    json['hand'] ? json_hand = json['hand'].map { |card| Card.from_json(card) } : json_hand = []
     self.new(name: json['name'], hand: json_hand, books: json['books'])
   end
 
