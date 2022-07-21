@@ -224,6 +224,29 @@ RSpec.describe 'GoFish' do
       game_hash = GoFish.dump(game1)
       expect(game_hash).to be_a_kind_of Hash
     end
+
+    fit 'can create an object without history' do 
+      game_hash = {
+        'players' =>  
+           [{ 'name' => 'William',
+              'hand' => [{'rank'=> 'Ace', 'suit' => 'Hearts' }],
+              'books' => [] }, 
+            { 'name' => 'Josh',
+              'hand' => [{'rank'=> '3', 'suit' => 'Spades' }],
+              'books' => [] }
+            ],
+        'deck' => {
+            'cards' => [{'rank'=> 'Ace', 'suit' => 'Diamonds'  }, {'rank'=> 'Ace', 'suit' => 'Spades'}]
+          }, 
+        'started' => false,
+        'current_user_index' => 0,
+        'books' => []
+      }
+
+      game = GoFish.from_json(game_hash)
+      expect(game.history).to eq []
+
+    end
   
   end
 

@@ -159,7 +159,7 @@ class GoFish
   def self.from_json(json)
     json_players = json['players'].map { |player| Player.from_json(player) }
     json_deck = Deck.new(json['deck']['cards'].map { |card| Card.from_json(card) })
-    json_history = json['history'].map { |result| RoundResult.from_json(result) }
+    json['history'] ? json_history = json['history'].map { |result| RoundResult.from_json(result) } : json_history = []
     self.new(players: json_players, deck: json_deck, history: json_history )
   end
 

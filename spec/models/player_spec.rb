@@ -54,7 +54,7 @@ RSpec.describe Player do
       expect(player.books).to eq ['Aces', '4s']
     end
 
-    fit 'can inflate an json player without a hand' do 
+    it 'can inflate an json player without a hand' do 
       player_hash = {
         'user_id' => 1
       }
