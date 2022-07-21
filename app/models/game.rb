@@ -24,6 +24,7 @@ class Game < ApplicationRecord
   end
 
   def current_player
+    binding.pry
     self.go_fish.current_player
   end
 
