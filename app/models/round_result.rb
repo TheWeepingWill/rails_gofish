@@ -147,7 +147,7 @@ class RoundResult
                   got_from: json['got_from'],
                   book_completed: json['book_completed'],
                   current_player_name: json['current_player_name'],
-                  resulting_cards: json['resulting_cards']
+                  resulting_cards: json['resulting_cards'].map { |card| Card.from_json(card)}
                 )
   end
   

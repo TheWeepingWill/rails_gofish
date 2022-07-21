@@ -8,6 +8,8 @@ class Game < ApplicationRecord
   comparison: { less_than_or_equal_to: VALID_PLAYER_MAX, greater_than_or_equal_to: VALID_PLAYER_MIN },
   numericality: { only_integer: true }
 
+  serialize :go_fish, GoFish
+  
   def remaining_players 
     player_count - users.length
   end

@@ -26,7 +26,7 @@ RSpec.describe 'GoFish' do
   end
 
   describe '#play_round' do 
-    fit 'does not get a match from player or fishing' do 
+    it 'does not get a match from player or fishing' do 
       setup_rigged_game(players: players, deck: [Card.new('2', 'Spades')], hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Hearts')]])
       game.play_round('Ace' , players[1])
       expect(game.current_user_index).to be 1
@@ -132,13 +132,42 @@ RSpec.describe 'GoFish' do
         'started' => false,
         'round' => 0,
         'books' => [],
-        'history' => [],
-        'current_player' => ''
+        'history' => [{ 
+          'current_player_name' => 'William',
+          'target_player_name' => 'Josh',
+          'rank' => 'Ace',
+          'got_from' => 'fishing',
+          'resulting_cards' => [{'rank' => '3', 'suit' =>  'Hearts'}],
+          'book_completed' => false,
+          'next_player_name' => 'Josh'
+          }, 
+          {
+            'current_player_name' => 'William',
+            'target_player_name' => 'Josh',
+            'rank' => 'Ace',
+            'got_from' => 'player',
+            'resulting_cards' => [{'rank' => 'Ace', 'suit' => 'Hearts'}],
+            'book_completed' => false,
+            'next_player_name' => 'William'
+          },
+          {     'current_player_name' => 'William',
+            'target_player_name' => 'Josh',
+            'rank' => 'Ace',
+            'got_from' => 'player',
+            'resulting_cards' => [{'rank' => 'Ace', 'suit' => 'Spades'}],
+            'book_completed' => false,
+            'next_player_name' => 'William'
+          }
+        ],
+        'current_player' => 'William'
       }
-      game = Game.from_json(json_game)
-      expect(game.players.map(&:name)).to match_array players.map(&:name)
-      expect(game.deck).to eq [Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')]
-      expect(game.started).to be false
+      serialized_game = GoFish.from_json(json_game)
+      expect(serialized_game.players.map(&:name)).to match_array players.map(&:name)
+      expect(serialized_game.deck.cards.first).to eq Card.new('Ace', 'Diamonds')
+      expect(serialized_game.history.first.current_player_message).to eq ["Josh did not have any Aces", 
+        "You went fishing and got the #{Card.new('3', 'Hearts').to_s}!",
+         "Turn is over", "It's Josh's turn"]
+      expect(serialized_game.started).to be false
     end 
   
   end

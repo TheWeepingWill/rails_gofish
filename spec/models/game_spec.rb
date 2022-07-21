@@ -63,7 +63,7 @@ RSpec.describe Game, type: :model do
       expect(game.go_fish).not_to be_nil
     end 
 
-    it 'inflates json back into an gofish object' do 
+    fit 'inflates json back into an gofish object' do 
       user1 = create(:user)
       user2 = create(:user)
       

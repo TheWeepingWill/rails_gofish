@@ -147,13 +147,14 @@ RSpec.describe 'RoundResult' do
         'target_player_name' => PLAYER_NAMES.last,
         'rank' => 'Ace',
         'got_from' => 'player',
-        'resulting_cards' => [matched_card],
+        'resulting_cards' => [{'rank' => 'Ace', 'suit' => 'Hearts'}],
         'book_completed' => false,
         'next_player_name' => PLAYER_NAMES[1]
       }
       result = RoundResult.from_json(request_payload)
       expect(result.output(Player.new(name: PLAYER_NAMES.first))).to eq ["#{PLAYER_NAMES.last} had Aces", "Go Again!"]
-      expect(result.target_player_message).to eq [ "Joe took your Aces", "It's Joe's turn" ]
+      expect(result.target_player_message).to eq ["Joe took your Aces", "It's #{PLAYER_NAMES[1]}'s turn"]
+      expect(result.resulting_cards.first).to eq Card.new('Ace', 'Hearts')
     end
   end
  
