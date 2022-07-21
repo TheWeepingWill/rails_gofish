@@ -9,14 +9,18 @@ class Game < ApplicationRecord
   numericality: { only_integer: true }
 
   serialize :go_fish, GoFish
-  
+
   def remaining_players 
     player_count - users.length
   end
 
   def start!
     return false unless player_count == users.length
-    update(started_at: DateTime.current)
+    
+    players = Users.map { |user| Player.new(user_id: user.id) }
+    go_fish = GoFish.new(players: players)
+    go_fish.start
+    update(go_fish: go_fish, started_at: DateTime.current)
   end
 
   def current_player

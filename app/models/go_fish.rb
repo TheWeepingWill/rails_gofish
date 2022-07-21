@@ -162,4 +162,13 @@ class GoFish
     json_history = json['history'].map { |result| RoundResult.from_json(result) }
     self.new(players: json_players, deck: json_deck, history: json_history )
   end
+
+  def self.load(json)
+    return nil if json.blank?
+    self.from_json(json)
+  end
+
+  def self.dump(obj) 
+    obj.as_json
+  end
 end

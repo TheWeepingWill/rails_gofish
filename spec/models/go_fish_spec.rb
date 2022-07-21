@@ -93,7 +93,7 @@ RSpec.describe 'GoFish' do
   end
 
   context 'json' do 
-    it 'can turn into json' do 
+    it 'can turn into json readable object' do 
       game1 = setup_rigged_game(players: players, hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Spades')]], deck: [ Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')])
       result = game1.as_json.with_indifferent_access
       expect(result).to eq({
@@ -116,7 +116,7 @@ RSpec.describe 'GoFish' do
 
     end 
 
-    it 'can inflate json into an object' do 
+    it 'can inflate a hash into an object' do 
       json_game = {
         'players' =>  
            [{ 'name' => 'William',
@@ -169,6 +169,61 @@ RSpec.describe 'GoFish' do
          "Turn is over", "It's Josh's turn"]
       expect(serialized_game.started).to be false
     end 
+
+    it 'can turn a json string into a object' do 
+      json_game = {
+        'players' =>  
+           [{ 'name' => 'William',
+              'hand' => [{'rank'=> 'Ace', 'suit' => 'Hearts' }],
+              'books' => [] }, 
+            { 'name' => 'Josh',
+              'hand' => [{'rank'=> '3', 'suit' => 'Spades' }],
+              'books' => [] }
+            ],
+        'deck' => {
+            'cards' => [{'rank'=> 'Ace', 'suit' => 'Diamonds'  }, {'rank'=> 'Ace', 'suit' => 'Spades'}]
+          }, 
+        'started' => false,
+        'round' => 0,
+        'books' => [],
+        'history' => [{ 
+          'current_player_name' => 'William',
+          'target_player_name' => 'Josh',
+          'rank' => 'Ace',
+          'got_from' => 'fishing',
+          'resulting_cards' => [{'rank' => '3', 'suit' =>  'Hearts'}],
+          'book_completed' => false,
+          'next_player_name' => 'Josh'
+          }, 
+          {
+            'current_player_name' => 'William',
+            'target_player_name' => 'Josh',
+            'rank' => 'Ace',
+            'got_from' => 'player',
+            'resulting_cards' => [{'rank' => 'Ace', 'suit' => 'Hearts'}],
+            'book_completed' => false,
+            'next_player_name' => 'William'
+          },
+          {     'current_player_name' => 'William',
+            'target_player_name' => 'Josh',
+            'rank' => 'Ace',
+            'got_from' => 'player',
+            'resulting_cards' => [{'rank' => 'Ace', 'suit' => 'Spades'}],
+            'book_completed' => false,
+            'next_player_name' => 'William'
+          }
+        ],
+        'current_player' => 'William'
+      }
+      game = GoFish.load(json_game)
+      expect(game).to be_a_kind_of GoFish
+    end
+
+    it 'can turn an object into a json object' do 
+      game1 = setup_rigged_game(players: players, hands: [[Card.new('Ace', 'Hearts')], [Card.new('3', 'Spades')]], deck: [ Card.new('Ace', 'Diamonds'), Card.new('Ace', 'Spades')])
+      game_hash = GoFish.dump(game1)
+      expect(game_hash).to be_a_kind_of Hash
+    end
   
   end
 
