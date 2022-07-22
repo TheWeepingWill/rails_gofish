@@ -1,0 +1,7 @@
+.card.flex 
+  .card__header 
+    h2 Players 
+  .card__body   
+    ul 
+      - @game.users.map do |user| 
+        li = user.name
