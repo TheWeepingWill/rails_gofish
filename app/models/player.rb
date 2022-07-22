@@ -64,7 +64,7 @@ class Player
 
   def self.from_json(json) 
     json['hand'] ? json_hand = json['hand'].map { |card| Card.from_json(card) } : json_hand = []
-    self.new(name: json['name'], hand: json_hand, books: json['books'])
+    self.new(name: json['name'], hand: json_hand, books: json['books'], user_id: json['user_id'])
   end
 
 end

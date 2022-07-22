@@ -21,6 +21,7 @@ class Game < ApplicationRecord
     go_fish = GoFish.new(players: players)
     go_fish.start
     update(go_fish: go_fish, started_at: DateTime.current)
+    binding.pry
   end
 
   def current_player

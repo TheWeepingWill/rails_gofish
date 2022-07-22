@@ -29,14 +29,25 @@ RSpec.describe 'Game', type: :system do
       end
     end
 
-    describe 'game plays rounds' do 
-      fit 'can play a round', :chrome do 
+    describe 'start game' do 
+      it 'displays correctly' do 
         game
         login(user2)
         click_on 'Join Game' 
-        # binding.pry
         expect(page).to have_content "Game has started" 
         expect(page).to have_content "It is Will's turn"
+      end
+    end
+
+    describe 'play round' do 
+      fit 'displays the round correct', :chrome do 
+        ready_game = create(:game, :started, users: [user1, user2], name: 'game1')
+        login(user1)
+        ready_game.start!
+        visit play_game_path(ready_game.id)
+        binding.pry
+        click_on 'Play Round'
+        expect(page).to have_content ready_game.go_fish.current_player.hand.map(&:to_s)
       end
     end
     
