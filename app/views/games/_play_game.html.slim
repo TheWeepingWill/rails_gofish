@@ -1,7 +1,11 @@
 .container
-  .flex
-  = render 'games/hand'
-  = render 'games/players'
-  .flex
-  = render'games/ask'
-    = render 'games/game_log'
+  -if !@game.go_fish.over?
+    .flex
+      = render 'games/hand'
+      = render 'games/players'
+    .flex
+      = render'games/ask'
+      = render 'games/game_log'
+  -else
+    = render 'games/game_over'
+  
