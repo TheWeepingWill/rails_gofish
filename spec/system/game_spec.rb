@@ -44,12 +44,12 @@ RSpec.describe 'Game', type: :system do
         ready_game = create(:game, :started, users: [user1, user2], name: 'game1')
         login(user1)
         ready_game.start!
+        expect(ready_game.go_fish.history.count).to be 0
         visit play_game_path(ready_game.id)
-        binding.pry
-        select
-        select "#{ready_game.current_player.hand.sample}"
+        select "#{user2.name}", from: 'Players'
+        select "#{ready_game.go_fish.current_player.hand_ranks.sample}", from: 'Ranks'
         click_on 'Ask'
-        expect(page).to have_css('button')
+        expect(Game.last.go_fish.history.count).to be 1
       end
     end
     
