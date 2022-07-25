@@ -1,0 +1,17 @@
+  = form_for(@game, url: game_path(@game))
+      - if current_user.name == @game.go_fish.current_player.name
+        .form__group
+          label.form__label for='Ranks' Ranks
+          select.form__dropdown name='Ranks'
+            - @game.go_fish.current_player.hand_ranks.each  do |rank|
+              option = rank
+        .form__group
+          label.form__label for='Players' Players
+          select.form__dropdown name='Players'
+            - @game.go_fish.all_player_names_but_current.each do |name|
+              option = name
+        .flex.justify-end
+          button.btn--primary type='submit' Ask
+  
+
+      

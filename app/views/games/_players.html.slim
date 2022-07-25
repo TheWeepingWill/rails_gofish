@@ -1,7 +1,11 @@
 .card.flex 
   .card__header 
     h2 Players 
-  .card__body   
-    ul 
-      - @game.users.map do |user| 
-        li = user.name
+  .card__body  
+    - if current_user.name == @game.current_player.name
+          - @game.go_fish.players.map do |player| 
+            li = player.name
+    - else
+      ul 
+        - @game.go_fish.players.map do |player| 
+          li = player.name

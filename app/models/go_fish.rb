@@ -3,12 +3,12 @@ class GoFish
   MORE_THAN_4_STARTING_HAND = 5
   attr_accessor :players, :deck, :started, :books, :current_user_index, 
   :round_result, :history, :next_user_index
-  def initialize(players: [], deck: Deck.new, books: [], history: [])
+  def initialize(players: [], deck: Deck.new, books: [], history: [], current_user_index: 0)
     @players = players
     @deck = deck
     @started = false
     @books = books
-    @current_user_index = 0
+    @current_user_index = current_user_index
     @history = history
     @next_user_index = 0
     @book_created = false
@@ -160,7 +160,8 @@ class GoFish
     json_players = json['players'].map { |player| Player.from_json(player) }
     json_deck = Deck.new(json['deck']['cards'].map { |card| Card.from_json(card) })
     json['history'] ? json_history = json['history'].map { |result| RoundResult.from_json(result) } : json_history = []
-    self.new(players: json_players, deck: json_deck, history: json_history )
+    json_index = json['current_user_index']
+    self.new(players: json_players, deck: json_deck, history: json_history, current_user_index: json_index)
   end
 
   def self.load(json)
@@ -170,5 +171,9 @@ class GoFish
 
   def self.dump(obj) 
     obj.as_json
+  end
+
+  def non_playing_players
+    players.delete_if { |player| player.user_id == current_player.user_id}
   end
 end

@@ -46,8 +46,10 @@ RSpec.describe 'Game', type: :system do
         ready_game.start!
         visit play_game_path(ready_game.id)
         binding.pry
-        click_on 'Play Round'
-        expect(page).to have_content ready_game.go_fish.current_player.hand.map(&:to_s)
+        select
+        select "#{ready_game.current_player.hand.sample}"
+        click_on 'Ask'
+        expect(page).to have_css('button')
       end
     end
     

@@ -21,6 +21,13 @@ class GamesController < ApplicationController
     @games = Game.paginate(page: params[:page])
   end
 
+  def update
+    @game = Game.find(params[:id])
+    @game.play_round(params[:Ranks], params[:Players])
+    # if game.over?
+    #   redirect_to game_over_url
+  end
+
   private
 
   def game_params

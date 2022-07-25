@@ -21,11 +21,17 @@ class Game < ApplicationRecord
     go_fish = GoFish.new(players: players)
     go_fish.start
     update(go_fish: go_fish, started_at: DateTime.current)
-    binding.pry
   end
 
   def current_player
     User.find_by(name: go_fish.current_player.name)
   end
+
+  def play_round(rank, player_name)
+    player = go_fish.find_player_by_name(player_name)
+    go_fish.play_round(rank, player)
+    self.save
+  end
+
 
 end
