@@ -1,7 +1,6 @@
-.card.flex 
-  .card__header 
-    h2 Hand
-  .card__body
-    ul
+  .player-hand.flex-wrap
+    .card__header 
+      h2 Hand
+    .card__body.flex.flex-wrap.gap-sm
       - @game.go_fish.players.select { |player| player.user_id == current_user.id }[0].hand.map do |card|
-        li = card.to_s
+        = image_tag "#{(card.suit).downcase}_#{card.rank.downcase}.svg", class: 'deck-card'

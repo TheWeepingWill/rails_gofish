@@ -1,9 +1,9 @@
-.container
+.container.game-screen.gap-md
   -if !@game.go_fish.over?
-    .flex
+    .flex.one-third-width
       = render 'games/hand'
-      = render 'games/players'
-    .flex
+      / = render 'games/players'
+    .flex.flex-col.justify-around.three-quarters-width
       = render'games/ask'
       = render 'games/game_log'
   -else
