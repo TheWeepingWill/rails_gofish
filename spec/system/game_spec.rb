@@ -12,7 +12,7 @@ RSpec.describe 'Game', type: :system do
       
       click_on 'Create Game'
       fill_in 'Player count', with: player_count.to_s
-      fill_in 'Name', with: 'Game'
+      fill_in 'Name', with: 'Game'``
       click_on 'Create' 
       
       game = Game.last

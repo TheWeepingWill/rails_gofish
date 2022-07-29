@@ -1,14 +1,14 @@
 .card
   .card__body
-    - if  @game.go_fish.history.empty?
-      - if current_user.name == @game.go_fish.current_player.name      
+    - if  game.go_fish.history.empty?
+      - if current_user.name == game.go_fish.current_player.name      
           p It's Your turn select a card!
       - else 
-          p It is #{@game.go_fish.current_player.name}'s turn
+          p It is #{game.go_fish.current_player.name}'s turn
     -else
-      - if current_user.name == @game.go_fish.history.last.current_player_name
-        - @game.go_fish.history.last.current_player_message.each do |message|
+      - if current_user.name == game.go_fish.history.last.current_player_name
+        - game.go_fish.history.last.current_player_message.each do |message|
           p = message
       - else 
-        - @game.go_fish.history.last.target_player_message.each do |message|
+        - game.go_fish.history.last.target_player_message.each do |message|
           p = message

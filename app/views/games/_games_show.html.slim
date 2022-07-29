@@ -1,0 +1,5 @@
+- if !game.started_at
+  = "Waiting for #{game.remaining_players} #{game.remaining_players == 1 ? 'player' : 'players'}..."
+- else 
+  = "#{current_user.name}" 
+  = render partial: 'games/play_game', locals: { game: game, current_user: current_user}

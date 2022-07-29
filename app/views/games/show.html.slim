@@ -1,8 +1,6 @@
 -provide(:title, 'Play Game')
-- if !@game.started_at
-  = "Waiting for #{@game.remaining_players} #{@game.remaining_players == 1 ? 'player' : 'players'}..."
-- else 
-  = "#{current_user.name}" 
-  = render 'games/play_game'
+.container.game-screen.gap-md data-controller="game" data-game-id=@game.id data-game-user_id=current_user.id
+  .flex.gap-md data-game-target="game_page"
+    = render partial: 'games/games_show', locals: { game: @game, current_user: current_user } 
 
   

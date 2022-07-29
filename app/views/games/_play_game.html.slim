@@ -1,11 +1,10 @@
-.container.game-screen.gap-md
-  -if !@game.go_fish.over?
-    .flex.one-third-width
-      = render 'games/hand'
-      / = render 'games/players'
-    .flex.flex-col.justify-around.three-quarters-width
-      = render'games/ask'
-      = render 'games/game_log'
-  -else
-    = render 'games/game_over'
-  
+-if !game.go_fish.over?
+  .flex.one-third-width 
+    = render partial: 'games/hand', locals: { game: game, current_user: current_user, go_fish: game.go_fish }
+    / = render 'games/players'
+  .flex.flex-col.justify-around.three-quarters-width 
+    = render partial: 'games/ask', locals: {game: game, current_user: current_user, go_fish: game.go_fish }
+    = render partial: 'games/game_log', locals: {game: game, current_user: current_user, go_fish: game.go_fish }
+-else
+  = render partial: 'games/game_over', locals: {game: game, current_user: current_user, go_fish: game.go_fish }
+
